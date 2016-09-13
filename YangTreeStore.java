@@ -7,10 +7,13 @@
  */
 package org.onosproject.yangtree;
 
-
+/**
+ * Provide a yang-based tree structure store.
+ * /
 public interface YangTreeStore {
 	
 	/**
+	 * Gets a node or subtree from a specific path with 
 	 * 
 	 * @param store  controller can support more than one tree, ONOS can default define a NE-Config tree and app also define its tree. 
 	 * LogicalTreeType is the identifier  of tree.
@@ -20,6 +23,7 @@ public interface YangTreeStore {
 	 * /
 	CheckedFuture<Optional<YangTreeNode>,ReadFailedException> get(LogicalTreeType store, YangTreePath path, Filter filter);
 	/**
+	 * Write a node into specific tree.
 	 * Eg: a/b/c/d was the path given; if node b is not present, assume c &d cannot be present; go on to create node b, c as its only child & node d as c’s only child
 	 * 
 	 * @param store  controller can support more than one tree, ONOS can default define a NE-Config tree and app also define its tree. 
@@ -29,7 +33,7 @@ public interface YangTreeStore {
 	 * /
 	CheckedFuture<FailedException> write(LogicalTreeType store, YangTreePath path, YangTreeNode data);
 	/**
-	 * 
+	 * Updates a exists tree node by a specific path. If this node do not exists, throw a exception.
 	 * @param store  controller can support more than one tree, ONOS can default define a NE-Config tree and app also define its tree. 
 	 * LogicalTreeType is the identifier  of tree.
 	 * @param path  specific path must be present.
@@ -37,13 +41,14 @@ public interface YangTreeStore {
 	 * /
 	CheckedFuture<FailedException> update(LogicalTreeType store, YangTreePath path, YangTreeNode data);
 	/**
-	 * 
+	 * Delete a exists tree node by a specific path. If this node do not exists, throw a exception.
 	 * @param store  controller can support more than one tree, ONOS can default define a NE-Config tree and app also define its tree. 
 	 * LogicalTreeType is the identifier  of tree.
 	 * @param path  specific path must be present.
 	 * /
 	CheckedFuture<FailedException> delete(LogicalTreeType store, YangTreePath path);
 	/**
+	 * Listen the change of given node or all children of given node.
 	 * 
 	 * @param store  controller can support more than one tree, ONOS can default define a NE-Config tree and app also define its tree. 
 	 * LogicalTreeType is the identifier  of tree.
